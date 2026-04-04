@@ -1,6 +1,6 @@
 # silversync-care
 
-> **Live demo →** `https://<wannabedataanalyst96>.github.io/silversync-care`
+> **Live demo →** `https://wannabedataanalyst96.github.io/silversync-care`
 # 💊 SilverSync Care
 
 A mobile-responsive medication tracker designed for elderly users — built with accessibility at its core. Large fonts, high-contrast UI, big touch targets, and a caregiver nudge feature.
@@ -11,7 +11,7 @@ A mobile-responsive medication tracker designed for elderly users — built with
 
 ## 🌐 Live Demo
 
-**[Open SilverSync Care →](https://<wannabedataanalyst96>.github.io/silversync-care/)**
+**[Open SilverSync Care →](https://wannabedataanalyst96.github.io/silversync-care/)**
 
 > Replace the link above with your actual GitHub Pages URL after deployment.
 
