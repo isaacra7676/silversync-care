@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SilverSync Care</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --gray-50: #f9f9f7;
+    --gray-100: #f0efea;
+    --gray-200: #dddbd2;
+    --gray-400: #9a9890;
+    --gray-600: #5a5852;
+    --taken: #1a6b3a;
+    --taken-bg: #e8f5ee;
+    --pending: #8a4500;
+    --pending-bg: #fff3e6;
+    --accent: #1a1a1a;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-50);
+    color: var(--black);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Header */
+  .header {
+    background: var(--black);
+    color: var(--white);
+    padding: 28px 24px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-inner { max-width: 700px; margin: 0 auto; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 28px; letter-spacing: -0.5px; }
+  .logo span { color: #a8d8b9; }
+  .tagline { font-size: 15px; color: #aaa; }
+  .today-pill {
+    background: #2a2a2a;
+    color: #ccc;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  /* Main layout */
+  .main { max-width: 700px; margin: 0 auto; padding: 24px 16px 100px; }
+
+  /* Section headings */
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 14px;
+    margin-top: 32px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* Day slots */
+  .day-grid { display: flex; flex-direction: column; gap: 10px; }
+
+  .day-slot {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    min-height: 76px;
+  }
+  .day-slot:hover { border-color: var(--gray-400); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .day-slot.today { border-color: var(--black); border-width: 2.5px; }
+
+  .day-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    min-width: 52px;
+    color: var(--black);
+  }
+  .day-slot.today .day-name { color: var(--black); }
+
+  .day-meds { flex: 1; }
+  .med-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    background: var(--gray-100);
+    color: var(--black);
+    padding: 5px 12px;
+    border-radius: 99px;
+    margin: 3px 4px 3px 0;
+  }
+  .med-pill .med-time { font-size: 13px; color: var(--gray-600); font-weight: 400; }
+  .empty-label { font-size: 15px; color: var(--gray-400); }
+
+  .status-badge {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 99px;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s, transform 0.1s;
+    min-width: 96px;
+    text-align: center;
+  }
+  .status-badge:active { transform: scale(0.96); }
+  .status-taken { background: var(--taken-bg); color: var(--taken); }
+  .status-pending { background: var(--pending-bg); color: var(--pending); }
+
+  /* Add form */
+  .add-form {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+  }
+  .form-row { display: flex; flex-direction: column; gap: 14px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; }
+  .form-label { font-size: 16px; font-weight: 600; color: var(--black); }
+  .form-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    padding: 14px 16px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--gray-50);
+    color: var(--black);
+    width: 100%;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-input:focus { outline: none; border-color: var(--black); background: var(--white); }
+
+  .day-checkboxes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .day-check-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border: 2px solid var(--gray-200);
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .day-check-label input { display: none; }
+  .day-check-label.checked { background: var(--black); color: var(--white); border-color: var(--black); }
+
+  .btn-add {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 18px 24px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    margin-top: 4px;
+    letter-spacing: -0.3px;
+  }
+  .btn-add:hover { background: #222; }
+  .btn-add:active { transform: scale(0.98); }
+
+  /* Nudge button */
+  .nudge-wrap { margin-top: 32px; }
+  .btn-nudge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    background: var(--white);
+    color: var(--black);
+    border: 2.5px solid var(--black);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: -0.3px;
+  }
+  .btn-nudge:hover { background: var(--gray-100); }
+  .btn-nudge:active { transform: scale(0.98); }
+  .nudge-icon { font-size: 26px; }
+
+  /* Popup */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .popup-overlay.visible { opacity: 1; pointer-events: all; }
+
+  .popup-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.25s;
+  }
+  .popup-overlay.visible .popup-card { transform: translateY(0); }
+  .popup-emoji { font-size: 52px; margin-bottom: 16px; }
+  .popup-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--black);
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+  .popup-msg { font-size: 17px; color: var(--gray-600); line-height: 1.6; margin-bottom: 28px; }
+  .btn-close {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 16px 28px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.15s;
+  }
+  .btn-close:hover { background: #222; }
+
+  /* Today highlight ring */
+  .today-ring {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--black);
+    flex-shrink: 0;
+  }
+
+  /* Manage meds list */
+  .med-list { display: flex; flex-direction: column; gap: 10px; }
+  .med-item {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .med-item-info { flex: 1; }
+  .med-item-name { font-size: 17px; font-weight: 600; color: var(--black); margin-bottom: 3px; }
+  .med-item-meta { font-size: 13px; color: var(--gray-600); }
+  .btn-delete {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    background: #fff0f0;
+    color: #b91c1c;
+    border: 2px solid #fecaca;
+    border-radius: var(--radius-sm);
+    padding: 10px 18px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .btn-delete:hover { background: #fee2e2; }
+  .btn-delete:active { transform: scale(0.96); }
+  .no-meds { font-size: 15px; color: var(--gray-400); padding: 12px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="logo">Silver<span>Sync</span> Care</div>
+      <div class="today-pill" id="today-date"></div>
+    </div>
+    <div class="tagline">Medication tracker for you and your loved ones</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="section-label">This week</div>
+  <div class="day-grid" id="day-grid"></div>
+
+  <div class="section-label">Manage medications</div>
+  <div class="med-list" id="med-list"></div>
+
+  <div class="section-label">Add a medication</div>
+  <div class="add-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label" for="med-name">Medication name</label>
+        <input class="form-input" type="text" id="med-name" placeholder="e.g. Metformin 500mg" autocomplete="off" />
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="med-time">Time</label>
+        <input class="form-input" type="time" id="med-time" value="08:00" />
+      </div>
+      <div class="form-field">
+        <label class="form-label">Frequency</label>
+        <div class="day-checkboxes" id="freq-btns">
+          <label class="day-check-label checked" id="freq-daily" onclick="setFreq('daily')"><input type="radio" name="freq" value="daily" checked style="display:none"> Daily</label>
+          <label class="day-check-label" id="freq-alternate" onclick="setFreq('alternate')"><input type="radio" name="freq" value="alternate" style="display:none"> Alternate days</label>
+          <label class="day-check-label" id="freq-weekly" onclick="setFreq('weekly')"><input type="radio" name="freq" value="weekly" style="display:none"> Weekly once</label>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Days</label>
+        <div class="day-checkboxes" id="day-checks"></div>
+      </div>
+      <button class="btn-add" onclick="addMed()">+ Add Medication</button>
+    </div>
+  </div>
+
+  <div class="nudge-wrap">
+    <button class="btn-nudge" onclick="showNudge()">
+      <span class="nudge-icon">🔔</span>
+      Send a Nudge to Dad
+    </button>
+  </div>
+
+</div>
+
+<!-- Popup -->
+<div class="popup-overlay" id="popup" onclick="closePopup(event)">
+  <div class="popup-card">
+    <div class="popup-emoji">💊</div>
+    <div class="popup-title">Nudge sent!</div>
+    <div class="popup-msg">Sending a gentle reminder to Dad's pillbox now... He'll get a buzz on his device.</div>
+    <button class="btn-close" onclick="closePopupBtn()">Got it</button>
+  </div>
+</div>
+
+<script>
+const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const today = new Date();
+const dayOfWeek = today.getDay(); // 0=Sun
+const todayIdx = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
+// Seed data  frequency: 'daily' | 'alternate' | 'weekly'
+let meds = [
+  { name: 'Metformin 500mg',   time: '08:00', days: [0,1,2,3,4,5,6], frequency: 'daily' },
+  { name: 'Lisinopril 10mg',   time: '20:00', days: [0,1,2,3,4,5,6], frequency: 'daily' },
+  { name: 'Vitamin D 1000 IU', time: '12:00', days: [0,2,4,6],       frequency: 'alternate' },
+  { name: 'Omega-3 Fish Oil',  time: '09:00', days: [1,3,5],         frequency: 'alternate' },
+  { name: 'Folic Acid',        time: '08:00', days: [0],             frequency: 'weekly' },
+  { name: 'Calcium + Mg',      time: '21:00', days: [3],             frequency: 'weekly' },
+];
+
+// Status per day index (toggled by user)
+let statuses = {};
+DAYS.forEach((_, i) => { statuses[i] = i < todayIdx ? 'taken' : (i === todayIdx ? 'pending' : 'pending'); });
+// Mark past days as taken by default
+for (let i = 0; i < todayIdx; i++) statuses[i] = 'taken';
+
+function freqLabel(f) {
+  if (f === 'alternate') return '<span style="font-size:11px;font-weight:600;background:#FAEEDA;color:#633806;padding:2px 7px;border-radius:6px;margin-left:4px;">Alt day</span>';
+  if (f === 'weekly')    return '<span style="font-size:11px;font-weight:600;background:#E1F5EE;color:#085041;padding:2px 7px;border-radius:6px;margin-left:4px;">Weekly</span>';
+  return '';
+}
+
+function formatTime(t) {
+  const [h, m] = t.split(':').map(Number);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 || 12;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('day-grid');
+  grid.innerHTML = DAYS.map((day, i) => {
+    const isToday = i === todayIdx;
+    const dayMeds = meds.filter(m => m.days.includes(i));
+    const st = statuses[i];
+    const medsHtml = dayMeds.length
+      ? dayMeds.map(m => `<span class="med-pill">${m.name}${freqLabel(m.frequency)} <span class="med-time">${formatTime(m.time)}</span></span>`).join('')
+      : `<span class="empty-label">No meds</span>`;
+    return `
+      <div class="day-slot${isToday ? ' today' : ''}">
+        ${isToday ? '<div class="today-ring"></div>' : ''}
+        <div class="day-name">${day}</div>
+        <div class="day-meds">${medsHtml}</div>
+        <button class="status-badge ${st === 'taken' ? 'status-taken' : 'status-pending'}" onclick="toggleStatus(${i})">
+          ${st === 'taken' ? '✓ Taken' : '· Pending'}
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleStatus(i) {
+  statuses[i] = statuses[i] === 'taken' ? 'pending' : 'taken';
+  renderGrid();
+}
+
+function renderDayChecks() {
+  const wrap = document.getElementById('day-checks');
+  wrap.innerHTML = DAYS.map((d, i) => `
+    <label class="day-check-label" id="check-label-${i}">
+      <input type="checkbox" id="check-${i}" checked onchange="updateCheckLabel(${i})" /> ${d}
+    </label>
+  `).join('');
+  DAYS.forEach((_, i) => updateCheckLabel(i));
+}
+
+function updateCheckLabel(i) {
+  const cb = document.getElementById(`check-${i}`);
+  const label = document.getElementById(`check-label-${i}`);
+  if (cb.checked) label.classList.add('checked');
+  else label.classList.remove('checked');
+}
+
+let selectedFreq = 'daily';
+function setFreq(f) {
+  selectedFreq = f;
+  ['daily','alternate','weekly'].forEach(v => {
+    const el = document.getElementById('freq-' + v);
+    if (el) el.classList.toggle('checked', v === f);
+  });
+}
+
+function addMed() {
+  const name = document.getElementById('med-name').value.trim();
+  const time = document.getElementById('med-time').value;
+  const days = DAYS.map((_, i) => document.getElementById(`check-${i}`).checked ? i : null).filter(x => x !== null);
+  if (!name) { document.getElementById('med-name').focus(); return; }
+  meds.push({ name, time, days, frequency: selectedFreq });
+  document.getElementById('med-name').value = '';
+  renderGrid();
+  renderMedList();
+}
+
+function renderMedList() {
+  const list = document.getElementById('med-list');
+  if (!meds.length) {
+    list.innerHTML = '<div class="no-meds">No medications added yet.</div>';
+    return;
+  }
+  list.innerHTML = meds.map((m, i) => `
+    <div class="med-item">
+      <div class="med-item-info">
+        <div class="med-item-name">${m.name} ${freqLabel(m.frequency||'daily')}</div>
+        <div class="med-item-meta">${formatTime(m.time)} &nbsp;·&nbsp; ${m.days.map(d => DAYS[d]).join(', ')}</div>
+      </div>
+      <button class="btn-delete" onclick="deleteMed(${i})">✕ Delete</button>
+    </div>
+  `).join('');
+}
+
+function deleteMed(i) {
+  meds.splice(i, 1);
+  renderGrid();
+  renderMedList();
+}
+
+function showNudge() {
+  document.getElementById('popup').classList.add('visible');
+}
+
+function closePopup(e) {
+  if (e.target === document.getElementById('popup')) closePopupBtn();
+}
+
+function closePopupBtn() {
+  document.getElementById('popup').classList.remove('visible');
+}
+
+// Set today date
+const opts = { weekday: 'long', month: 'long', day: 'numeric' };
+document.getElementById('today-date').textContent = today.toLocaleDateString('en-IN', opts);
+
+renderDayChecks();
+renderGrid();
+renderMedList();
+</script>
+</body>
+</html>
